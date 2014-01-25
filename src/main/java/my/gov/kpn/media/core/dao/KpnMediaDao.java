@@ -36,7 +36,9 @@ public interface KpnMediaDao {
 
     Integer count(String filter);
 
-    Integer countMedia(KpnDirectory directory);
+    Integer count(KpnDirectory directory);
+
+    boolean isExists(String name);
 
     // ====================================================================================================
     // CRUD

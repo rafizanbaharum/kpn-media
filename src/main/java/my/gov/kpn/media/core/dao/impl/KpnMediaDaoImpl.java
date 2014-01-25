@@ -108,7 +108,7 @@ public class KpnMediaDaoImpl extends DaoSupport<Long, KpnMedia, KpnMediaImpl> im
     }
 
     @Override
-    public Integer countMedia(KpnDirectory directory) {
+    public Integer count(KpnDirectory directory) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select count(m) from KpnMedia m where " +
                 "m.directory = :directory " +
@@ -117,5 +117,16 @@ public class KpnMediaDaoImpl extends DaoSupport<Long, KpnMedia, KpnMediaImpl> im
         query.setInteger("state", ACTIVE.ordinal());
         return ((Long) query.uniqueResult()).intValue();
     }
+
+
+    @Override
+    public boolean isExists(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select count(*) from KpnMedia u where " +
+                "u.name = :name");
+        query.setString("name", name);
+        return 0 < ((Long) query.uniqueResult()).intValue();
+    }
+
 }
     

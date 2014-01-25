@@ -142,6 +142,17 @@ public class KpnDirectoryDaoImpl extends DaoSupport<Long, KpnDirectory, KpnDirec
         return ((Long) query.uniqueResult()).intValue();
     }
 
+
+    @Override
+    public boolean isExists(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select count(*) from KpnDirectory u where " +
+                "u.name = :name");
+        query.setString("name", name);
+        return 0 < ((Long) query.uniqueResult()).intValue();
+    }
+
+
     @Override
     public void addMedia(KpnDirectory directory, KpnMedia media, KpnUser user) {
         Validate.notNull(directory, "directory should not be null");

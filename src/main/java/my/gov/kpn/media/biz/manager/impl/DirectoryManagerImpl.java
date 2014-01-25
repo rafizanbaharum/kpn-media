@@ -1,5 +1,6 @@
 package my.gov.kpn.media.biz.manager.impl;
 
+import my.gov.kpn.media.biz.Util;
 import my.gov.kpn.media.biz.manager.DirectoryManager;
 import my.gov.kpn.media.core.dao.KpnDirectoryDao;
 import my.gov.kpn.media.core.dao.KpnMediaDao;
@@ -81,49 +82,48 @@ public class DirectoryManagerImpl implements DirectoryManager {
 
     @Override
     public boolean isDirectoryExists(String name) {
-        return false;  // TODO:
+        return directoryDao.isExists(name);
 
     }
 
     @Override
     public boolean isMediaExists(String name) {
-        return false;  // TODO:
-
+        return mediaDao.isExists(name);
     }
 
     @Override
     public void saveDirectory(KpnDirectory directory) {
-        // TODO:
-
+        directoryDao.save(directory, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 
     @Override
     public void updateDirectory(KpnDirectory directory) {
-        // TODO:
-
+        directoryDao.update(directory, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 
     @Override
     public void removeDirectory(KpnDirectory directory) {
-        // TODO:
-
+        directoryDao.remove(directory, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 
     @Override
     public void addMedia(KpnDirectory directory, KpnMedia media) {
-        // TODO:
-
+        directoryDao.addMedia(directory, media, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 
     @Override
     public void updateMedia(KpnDirectory directory, KpnMedia media) {
-        // TODO:
-
+        directoryDao.updateMedia(directory, media, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 
     @Override
     public void removeMedia(KpnDirectory directory, KpnMedia media) {
-        // TODO:
-
+        directoryDao.removeMedia(directory, media, Util.getCurrentUser());
+        sessionFactory.getCurrentSession().flush();
     }
 }
