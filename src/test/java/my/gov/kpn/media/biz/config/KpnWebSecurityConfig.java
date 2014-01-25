@@ -1,4 +1,4 @@
-package my.gov.kpn.media.web.config;
+package my.gov.kpn.media.biz.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

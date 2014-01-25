@@ -1,9 +1,9 @@
 package my.gov.kpn.media.web;
 
-import my.gov.kpn.media.web.config.KpnWebDatasourceConfig;
-import my.gov.kpn.media.web.config.KpnWebMvcConfig;
-import my.gov.kpn.media.web.config.KpnWebSecurityConfig;
-import my.gov.kpn.media.web.config.KpnWebViewConfig;
+import my.gov.kpn.media.biz.config.KpnWebDatasourceConfig;
+import my.gov.kpn.media.biz.config.KpnWebMvcConfig;
+import my.gov.kpn.media.biz.config.KpnWebSecurityConfig;
+import my.gov.kpn.media.biz.config.KpnWebViewConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

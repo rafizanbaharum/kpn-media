@@ -1,4 +1,4 @@
-package my.gov.kpn.media.web;
+package my.gov.kpn.media.biz;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = AppConfiguration.class)
+@ContextConfiguration(classes = TestConfiguration.class)
 public class AppTests {
     private MockMvc mockMvc;
 

@@ -1,4 +1,4 @@
-package my.gov.kpn.media.web.config;
+package my.gov.kpn.media.biz.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -15,15 +15,15 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-public class KpnWebDatasourceConfig {
+public class TestDatasourceConfig {
 
     @Autowired
     private Environment env;
 
-    @Bean
+    @Bean(name = "sessionFactoryTest")
     public SessionFactory sessionFactory() {
         return new LocalSessionFactoryBuilder(dataSource())
-                .scanPackages("my.gov.kpn.core.model")
+                .scanPackages("my.gov.kpn.media.core.model")
                 .addProperties(hibernateProperties())
                 .buildSessionFactory();
     }

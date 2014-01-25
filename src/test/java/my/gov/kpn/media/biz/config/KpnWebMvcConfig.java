@@ -1,4 +1,4 @@
-package my.gov.kpn.media.web.config;
+package my.gov.kpn.media.biz.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
