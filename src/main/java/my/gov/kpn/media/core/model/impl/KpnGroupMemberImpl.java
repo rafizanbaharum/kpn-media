@@ -1,9 +1,6 @@
 package my.gov.kpn.media.core.model.impl;
 
-import my.gov.kpn.media.core.model.KpnGroup;
-import my.gov.kpn.media.core.model.KpnGroupMember;
-import my.gov.kpn.media.core.model.KpnMetadata;
-import my.gov.kpn.media.core.model.KpnPrincipal;
+import my.gov.kpn.media.core.model.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,9 +23,9 @@ public class KpnGroupMemberImpl implements KpnGroupMember, Serializable {
     @JoinColumn(name = "GROUP_ID")
     private KpnGroup group;
 
-    @OneToOne(targetEntity = KpnPrincipalImpl.class)
+    @OneToOne(targetEntity = KpnUserImpl.class)
     @JoinColumn(name = "MEMBER_ID")
-    private KpnPrincipal member;
+    private KpnUser member;
 
     @Embedded
     private KpnMetadata metadata;
@@ -49,11 +46,11 @@ public class KpnGroupMemberImpl implements KpnGroupMember, Serializable {
         this.group = group;
     }
 
-    public KpnPrincipal getMember() {
+    public KpnUser getMember() {
         return member;
     }
 
-    public void setMember(KpnPrincipal member) {
+    public void setMember(KpnUser member) {
         this.member = member;
     }
 

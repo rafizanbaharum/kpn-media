@@ -10,8 +10,8 @@ public interface KpnGroupMember extends KpnMetaObject {
 
     void setGroup(KpnGroup group);
 
-    KpnPrincipal getMember();
+    KpnUser getMember();
 
-    void setMember(KpnPrincipal member);
+    void setMember(KpnUser member);
 }
 

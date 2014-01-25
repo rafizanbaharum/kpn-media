@@ -3,7 +3,6 @@ package my.gov.kpn.media.core.dao;
 import my.gov.kpn.media.core.model.*;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author rafizan.baharum
@@ -21,27 +20,25 @@ public interface KpnGroupDao {
 
     List<String> findAllGroupName();
 
-    List<KpnPrincipal> findMembers(KpnGroup group);
+    List<KpnUser> findMembers(KpnGroup group);
 
-    List<KpnPrincipal> findMembers(KpnGroup group, KpnPrincipalType type);
+    List<KpnUser> findMembers(KpnGroup group, KpnPrincipalType type);
 
-    List<KpnGroup> findMemberships(KpnPrincipal principal);
+    List<KpnGroup> findMemberships(KpnUser user);
 
-    List<KpnPrincipal> findMembers(KpnGroup group, Integer offset, Integer limit);
+    List<KpnUser> findMembers(KpnGroup group, Integer offset, Integer limit);
 
     List<KpnGroup> find(Integer offset, Integer limit);
 
     List<KpnGroup> find(String filter, Integer offset, Integer limit);
 
-    List<KpnGroup> findParentGroup(KpnGroup group);
-
-    KpnGroupMember findGroupMember(KpnGroup group, KpnPrincipal principal);
+    KpnGroupMember findGroupMember(KpnGroup group, KpnUser user);
 
     Integer count();
 
     Integer count(String filter);
 
-    boolean isMemberOf(KpnGroup group, KpnPrincipal principal);
+    boolean isMemberOf(KpnGroup group, KpnUser principal);
 
     void save(KpnGroup group, KpnUser user);
 
@@ -51,9 +48,9 @@ public interface KpnGroupDao {
 
     void remove(KpnGroup group, KpnUser user);
 
-    void addMember(KpnGroup group, KpnPrincipal principal, KpnUser user);
+    void addMember(KpnGroup group, KpnUser principal, KpnUser user);
 
-    void addMembers(KpnGroup group, List<KpnPrincipal> principals, KpnUser user);
+    void addMembers(KpnGroup group, List<KpnUser> principals, KpnUser user);
 
-    void removeMember(KpnGroup group, KpnPrincipal principal);
+    void removeMember(KpnGroup group, KpnUser user);
 }

@@ -56,13 +56,13 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     }
 
     @Override
-    public List<KpnPrincipal> findMembers(KpnGroup group) {
+    public List<KpnUser> findMembers(KpnGroup group) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select gm.member from KpnGroupMember gm where " +
                 "gm.group = :group " +
                 "order by gm.member.name");
         query.setEntity("group", group);
-        return (List<KpnPrincipal>) query.list();
+        return (List<KpnUser>) query.list();
     }
 
     /**
@@ -75,7 +75,7 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
      * @return
      */
     @Override
-    public List<KpnPrincipal> findMembers(KpnGroup group, KpnPrincipalType type) {
+    public List<KpnUser> findMembers(KpnGroup group, KpnPrincipalType type) {
         Session session = sessionFactory.getCurrentSession();
         Query query = null;
 
@@ -99,20 +99,20 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
         }
         query.setEntity("group", group);
         query.setInteger("type", type.ordinal());
-        return (List<KpnPrincipal>) query.list();
+        return (List<KpnUser>) query.list();
     }
 
     @Override
-    public List<KpnGroup> findMemberships(KpnPrincipal principal) {
+    public List<KpnGroup> findMemberships(KpnUser user) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select gm.group from KpnGroupMember gm inner join gm.member where " +
-                "gm.member = :principal");
-        query.setEntity("principal", principal);
+                "gm.member = :user");
+        query.setEntity("user", user);
         return (List<KpnGroup>) query.list();
     }
 
     @Override
-    public List<KpnPrincipal> findMembers(KpnGroup group, Integer offset, Integer limit) {
+    public List<KpnUser> findMembers(KpnGroup group, Integer offset, Integer limit) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select gm.member from KpnGroupMember gm where " +
                 "gm.group = :group " +
@@ -120,7 +120,7 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
         query.setEntity("group", group);
         query.setFirstResult(offset);
         query.setMaxResults(limit);
-        return (List<KpnPrincipal>) query.list();
+        return (List<KpnUser>) query.list();
     }
 
     @Override
@@ -147,14 +147,6 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     }
 
     @Override
-    public List<KpnGroup> findParentGroup(KpnGroup group) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select g from KpnGroup g inner join g.members m where m.member = :group");
-        query.setEntity("group", group);
-        return (List<KpnGroup>) query.list();
-    }
-
-    @Override
     public Integer count() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select count(g) from KpnGroup g where " +
@@ -175,24 +167,24 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     }
 
     @Override
-    public boolean isMemberOf(KpnGroup group, KpnPrincipal principal) {
+    public boolean isMemberOf(KpnGroup group, KpnUser user) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select count(g) from KpnGroupMember g where " +
                 "g.group = :group " +
                 "and g.member = :principal");
         query.setEntity("group", group);
-        query.setEntity("principal", principal);
+        query.setEntity("principal", user);
         return ((Long) query.uniqueResult()).intValue() >= 1;
     }
 
     @Override
-    public KpnGroupMember findGroupMember(KpnGroup group, KpnPrincipal principal) {
+    public KpnGroupMember findGroupMember(KpnGroup group, KpnUser user) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select g from KpnGroupMember g where " +
                 "g.group = :group " +
-                "and g.member = :principal");
+                "and g.member = :user");
         query.setEntity("group", group);
-        query.setEntity("principal", principal);
+        query.setEntity("user", user);
         return (KpnGroupMember) query.uniqueResult();
     }
 
@@ -201,7 +193,7 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     // =============================================================================
 
     @Override
-    public void addMember(KpnGroup group, KpnPrincipal member, KpnUser user) {
+    public void addMember(KpnGroup group, KpnUser member, KpnUser user) {
         Validate.notNull(group, "Group should not be null");
         Validate.notNull(member, "Group member should not be null");
 
@@ -220,21 +212,21 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     }
 
     @Override
-    public void addMembers(KpnGroup group, List<KpnPrincipal> principals, KpnUser user) {
-        List<KpnPrincipal> principalGroups = findMembers(group);
-        List<KpnPrincipal> newPrincipals = new ArrayList<KpnPrincipal>();
+    public void addMembers(KpnGroup group, List<KpnUser> users, KpnUser user) {
+        List<KpnUser> principalGroups = findMembers(group);
+        List<KpnUser> newPrincipals = new ArrayList<KpnUser>();
 
-        for (KpnPrincipal principal : principals) {
+        for (KpnUser principal : users) {
             newPrincipals.add(principal);
         }
 
-        for (KpnPrincipal principalGroup : principalGroups) {
+        for (KpnUser principalGroup : principalGroups) {
             if (!newPrincipals.contains(principalGroup)) {
                 removeMember(group, principalGroup);
             }
         }
 
-        for (KpnPrincipal newGroup : newPrincipals) {
+        for (KpnUser newGroup : newPrincipals) {
             if (!principalGroups.contains(newGroup)) {
                 addMember(group, newGroup, user);
             }
@@ -242,11 +234,11 @@ public class KpnGroupDaoImpl extends DaoSupport<Long, KpnGroup, KpnGroupImpl> im
     }
 
     @Override
-    public void removeMember(KpnGroup group, KpnPrincipal principal) {
+    public void removeMember(KpnGroup group, KpnUser user) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select g from KpnGroupMember g where g.group = :group and g.member = :principal");
         query.setEntity("group", group);
-        query.setEntity("principal", principal);
+        query.setEntity("user", user);
         KpnGroupMember groupMember = (KpnGroupMember) query.uniqueResult();
         session.delete(groupMember);
     }
