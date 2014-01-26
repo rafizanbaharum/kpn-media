@@ -1,6 +1,6 @@
 package my.gov.kpn.media.biz;
 
-import my.gov.kpn.media.biz.config.TestDatasourceConfig;
+import my.gov.kpn.media.web.config.TestDatasourceConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
