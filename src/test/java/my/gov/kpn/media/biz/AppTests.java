@@ -31,6 +31,11 @@ public class AppTests {
     }
 
     @Test
+    public void createOrUpdateScheme() throws Exception {
+        // Automatically create-update by hibernate
+    }
+
+    @Test
     public void simple() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())

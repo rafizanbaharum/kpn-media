@@ -30,7 +30,8 @@ public class Converter {
         model.setId(media.getId());
         model.setName(media.getName());
         model.setDescription(media.getDescription());
-        model.setMimeType(media.getMimeType());
+        model.setContentType(media.getContentType());
+        model.setFileSize(media.getFileSize());
         model.setPath(media.getPath());
         return model;
     }

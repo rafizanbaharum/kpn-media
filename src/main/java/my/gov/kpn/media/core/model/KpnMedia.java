@@ -29,4 +29,8 @@ public interface KpnMedia extends KpnMetaObject {
     KpnDirectory getDirectory();
 
     void setDirectory(KpnDirectory directory);
+
+    byte[] getBytes();
+
+    void setBytes(byte[] bytes);
 }

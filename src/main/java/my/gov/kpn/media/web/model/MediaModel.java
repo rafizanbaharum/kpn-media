@@ -9,7 +9,8 @@ public class MediaModel {
     private Long id;
     private String name;
     private String description;
-    private String mimeType;
+    private String contentType;
+    private String fileSize;
     private String path;
 
     public Long getId() {
@@ -36,12 +37,12 @@ public class MediaModel {
         this.description = description;
     }
 
-    public String getMimeType() {
-        return mimeType;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public String getPath() {
@@ -50,5 +51,13 @@ public class MediaModel {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
     }
 }

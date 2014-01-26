@@ -35,6 +35,9 @@ public class KpnMediaImpl implements KpnMedia {
     @Column(name = "FILE_SIZE")
     private String fileSize;
 
+    @Transient
+    private byte[] bytes;
+
     @OneToOne(targetEntity = KpnDirectoryImpl.class)
     @JoinColumn(name = "DIRECTORY_ID")
     private KpnDirectory directory;
@@ -82,12 +85,10 @@ public class KpnMediaImpl implements KpnMedia {
         this.contentType = contentType;
     }
 
-    @Override
     public String getFileSize() {
         return fileSize;
     }
 
-    @Override
     public void setFileSize(String fileSize) {
         this.fileSize = fileSize;
     }
@@ -106,6 +107,16 @@ public class KpnMediaImpl implements KpnMedia {
 
     public void setMetadata(KpnMetadata metadata) {
         this.metadata = metadata;
+    }
+
+    @Override
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    @Override
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
     }
 }
 

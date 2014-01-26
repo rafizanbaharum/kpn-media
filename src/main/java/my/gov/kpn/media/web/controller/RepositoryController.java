@@ -2,6 +2,7 @@ package my.gov.kpn.media.web.controller;
 
 import my.gov.kpn.media.biz.manager.RepositoryManager;
 import my.gov.kpn.media.web.converter.Converter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/repository")
 public class RepositoryController {
+
+    private static final Logger log = Logger.getLogger(RepositoryController.class);
 
     @Autowired
     private RepositoryManager repositoryManager;
@@ -36,8 +39,9 @@ public class RepositoryController {
         return "/repository/directory/add";
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.GET)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveDirectory() {
+        log.debug("Saving directory");
         return "/repository/directory/save";
     }
 
