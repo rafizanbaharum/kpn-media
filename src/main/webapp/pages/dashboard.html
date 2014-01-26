@@ -69,7 +69,8 @@
                                         <tbody>
                                             <tr th:each="directoryModel:${directoryModels} ">
                                                 <td class="col-md-12">
-                                                    <i class='glyphicon glyphicon-folder-close'></i>
+                                                    <i class='icon-gray glyphicon glyphicon-folder-close'></i>
+                                                    &nbsp;
                                                     <a th:href="@{/directory/view/} + ${directoryModel.code}"
                                                        th:text="${directoryModel.name}"></a>
                                                 </td>

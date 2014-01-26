@@ -15,14 +15,22 @@
 .label-vertical {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation = 3);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     display: block;
     text-align: inherit;
     padding-bottom: 30px;
 }
 
 .table-permission thead th {
-  font-size: 12px;
-  font-weight: 500;
+    font-size: 12px;
+    font-weight: 500;
     height: 80px;
+}
+
+.icon-blue {
+    color: #2A6496;
+}
+
+.icon-gray {
+    color: #646464;
 }
