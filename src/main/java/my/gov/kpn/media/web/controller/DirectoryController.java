@@ -43,7 +43,7 @@ public class DirectoryController {
         modelMap.addAttribute("directoryModel", directoryModel);
         modelMap.addAttribute("mediaModels", mediaModels);
 
-        return "directory/view";
+        return "/directory/view";
     }
 
     // TODO updateDirectory()

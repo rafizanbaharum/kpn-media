@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class UploadedFileModel {
 
+    private String directoryCode;
     private MultipartFile file;
 
     public MultipartFile getFile() {
@@ -18,4 +19,11 @@ public class UploadedFileModel {
         this.file = file;
     }
 
+    public String getDirectoryCode() {
+        return directoryCode;
+    }
+
+    public void setDirectoryCode(String directoryCode) {
+        this.directoryCode = directoryCode;
+    }
 }

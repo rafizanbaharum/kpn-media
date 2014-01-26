@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="common :: head"></head>
+
+<body class="page-header-fixed">
+
+    <div th:replace="common :: header"></div>
+
+    <div class="clearfix"></div>
+    <div class="page-container">
+        <div th:replace="common :: sidebar-menu"></div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="dashboard.html" th:href="@{/dashboard}">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet box grey">
+                        <div class="portlet-title">
+                            <div class="caption"><i class="icon-bookmark"></i>Directories</div>
+                        </div>
+                        <div class="portlet-body">
+                            <form th:action="@{/file/upload}" method="post" enctype="multipart/form-data">
+                                <input id="fileupload" type="file" name="files[]" data-url=""
+                                       multiple=""/>
+                                <input id="submit" type="submit" name="submit" value="Uploads" data-url=""
+                                       multiple=""/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="common :: footer"></div>
+</body>
+</html>

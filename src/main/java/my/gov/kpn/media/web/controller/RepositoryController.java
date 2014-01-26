@@ -8,10 +8,13 @@ import my.gov.kpn.media.web.model.DirectoryModel;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.io.File;
 
 /**
  * @author rafizan.baharum
@@ -22,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RepositoryController {
 
     private static final Logger log = Logger.getLogger(RepositoryController.class);
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     private RepositoryManager repositoryManager;
@@ -50,6 +56,10 @@ public class RepositoryController {
         directory.setName(directoryModel.getName());
         directory.setCode(RandomStringUtils.randomAlphanumeric(10));  // generate unique code
         repositoryManager.saveDirectory(directory);
+
+        String baseDir = env.getProperty("base.dir");
+        boolean mkdirs = new File(baseDir + "/" + directory.getName()).mkdirs();
+
         return "redirect:/dashboard";
     }
 
