@@ -57,7 +57,8 @@ public class KpnUserDaoImpl extends DaoSupport<Long, KpnUser, KpnUserImpl> imple
     @Override
     public KpnUser findByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select u from KpnUser u where u.name = :username");// and u.metadata.state = :state");
+        Query query = session.createQuery("select u from KpnUser u where u.name = :username " +
+                "and u.metadata.state = :state");// and u.metadata.state = :state");
         query.setString("username", username);
         query.setInteger("state", KpnMetaState.ACTIVE.ordinal());
         return (KpnUser) query.uniqueResult();
