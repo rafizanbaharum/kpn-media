@@ -6,18 +6,17 @@ import java.util.List;
  * @author rafizan.baharum
  * @since 1/25/14
  */
-public interface KpnDirectory extends KpnMetaObject{
+public interface KpnDirectory extends KpnMetaObject {
 
     String getName();
 
     void setName(String name);
 
-    String getDescription();
+    String getCode();
 
-    void setDescription(String description);
+    void setCode(String code);
 
     List<KpnMedia> getMedias();
 
     void setMedias(List<KpnMedia> medias);
-
 }

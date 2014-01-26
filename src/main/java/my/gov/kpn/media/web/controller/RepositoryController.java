@@ -5,6 +5,7 @@ import my.gov.kpn.media.core.model.KpnDirectory;
 import my.gov.kpn.media.core.model.impl.KpnDirectoryImpl;
 import my.gov.kpn.media.web.converter.Converter;
 import my.gov.kpn.media.web.model.DirectoryModel;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,10 +46,9 @@ public class RepositoryController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveDirectory(DirectoryModel directoryModel, ModelMap modelMap) {
-        log.debug("Saving directory");
         KpnDirectory directory = new KpnDirectoryImpl();
         directory.setName(directoryModel.getName());
-        directory.setDescription(directoryModel.getDescription());
+        directory.setCode(RandomStringUtils.randomAlphanumeric(10));  // generate unique code
         repositoryManager.saveDirectory(directory);
         return "redirect:/dashboard";
     }

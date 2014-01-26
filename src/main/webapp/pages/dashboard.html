@@ -25,6 +25,7 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li><a data-toggle="modal" href="#responsive">Directory</a></li>
+                                <li><a data-toggle="modal" href="#responsive">Upload file(s)</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -49,7 +50,7 @@
                                               th:object="${commandDirectory}"
                                               method="post">
                                             <div class="modal-body">
-                                                <div class="scroller" style="height:150px" data-always-visible="1"
+                                                <div class="scroller" style="height:100px" data-always-visible="1"
                                                      data-rail-visible1="1">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -61,22 +62,10 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <p>Description for the new directory: </p>
-
-                                                            <p>
-                                                                <input th:field="*{description}" type="text"
-                                                                       class="col-md-12 form-control input-sm"/>
-                                                            </p>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" data-dismiss="modal" class="btn default">Close
-                                                </button>
-                                                <button type="submit" class="btn green">Save changes</button>
+                                                <button type="submit" class="btn green">Create</button>
                                             </div>
                                         </form>
                                     </div>
@@ -100,23 +89,22 @@
                                     </form>
                                 </div>
                             </div>
+                            <br/>
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-condensed table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Description</th>
+                                            <th>Title</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="directoryModel:${directoryModels} ">
-                                            <td class="col-md-3">
-                                                <i class='icon-folder-close'></i>
+                                            <td class="col-md-10">
+                                            <i class='icon-folder-close'></i>
                                                 <span th:text="${directoryModel.name}"></span>
                                             </td>
-                                            <td class="col-md-7" th:text="${directoryModel.description}"></td>
                                             <td class="col-md-2">
                                                 <a href="#"
                                                    th:href="@{/directory/view/} + ${directoryModel.name}"

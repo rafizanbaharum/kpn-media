@@ -24,8 +24,8 @@ public class KpnDirectoryImpl implements KpnDirectory {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION")
-    private String description;
+    @Column(name = "CODE")
+    private String code;
 
     @OneToMany(targetEntity = KpnMediaImpl.class, mappedBy = "directory")
     private List<KpnMedia> medias;
@@ -49,12 +49,14 @@ public class KpnDirectoryImpl implements KpnDirectory {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    @Override
+    public String getCode() {
+        return code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    @Override
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public List<KpnMedia> getMedias() {
@@ -72,5 +74,6 @@ public class KpnDirectoryImpl implements KpnDirectory {
     public void setMetadata(KpnMetadata metadata) {
         this.metadata = metadata;
     }
+
 }
 
