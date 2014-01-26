@@ -52,7 +52,6 @@ public class KpnUserDetailService implements UserDetailsService {
 
     private Set<GrantedAuthority> loadGrantedAuthoritiesFor(KpnUser user) {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-        //load all roles which ties to user
         for (KpnPrincipalRole role : user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleType().name()));
         }
