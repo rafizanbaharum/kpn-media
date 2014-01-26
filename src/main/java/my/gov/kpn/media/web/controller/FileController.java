@@ -1,6 +1,6 @@
 package my.gov.kpn.media.web.controller;
 
-import my.gov.kpn.media.core.dao.KpnMediaDao;
+import my.gov.kpn.media.biz.manager.RepositoryManager;
 import my.gov.kpn.media.core.model.KpnMedia;
 import my.gov.kpn.media.core.model.impl.KpnMediaImpl;
 import my.gov.kpn.media.web.model.UploadedFileModel;
@@ -35,16 +35,16 @@ public class FileController {
     private static final int ONE_MB = 1024;
 
     @Autowired
-    private KpnMediaDao mediaDao;
+    private RepositoryManager repositoryManager;
 
     @Autowired
     private FileValidator fileValidator;
 
     @RequestMapping("/form")
-    public ModelAndView getUploadForm(
+    public String getUploadForm(
             @ModelAttribute("uploadedFile") UploadedFileModel uploadedFile,
             BindingResult result) {
-        return new ModelAndView("upload_form");
+        return "";
     }
 
     @RequestMapping("/upload")
