@@ -29,8 +29,11 @@ public class KpnMediaImpl implements KpnMedia {
     @Column(name = "PATH")
     private String path;
 
-    @Column(name = "MIME_TYPE")
-    private String mimeType;
+    @Column(name = "CONTENT_TYPE")
+    private String contentType;
+
+    @Column(name = "FILE_SIZE")
+    private String fileSize;
 
     @OneToOne(targetEntity = KpnDirectoryImpl.class)
     @JoinColumn(name = "DIRECTORY_ID")
@@ -71,12 +74,22 @@ public class KpnMediaImpl implements KpnMedia {
         this.path = path;
     }
 
-    public String getMimeType() {
-        return mimeType;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    @Override
+    public String getFileSize() {
+        return fileSize;
+    }
+
+    @Override
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
     }
 
     public KpnDirectory getDirectory() {

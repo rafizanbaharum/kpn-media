@@ -4,7 +4,7 @@ package my.gov.kpn.media.core.model;
  * @author rafizan.baharum
  * @since 1/26/14
  */
-public interface KpnMedia extends KpnMetaObject{
+public interface KpnMedia extends KpnMetaObject {
 
     String getName();
 
@@ -14,9 +14,13 @@ public interface KpnMedia extends KpnMetaObject{
 
     void setDescription(String description);
 
-    String getMimeType();
+    String getContentType();
 
-    void setMimeType(String mimeType);
+    void setContentType(String contentType);
+
+    String getFileSize();
+
+    void setFileSize(String fileSize);
 
     String getPath();
 
@@ -25,5 +29,4 @@ public interface KpnMedia extends KpnMetaObject{
     KpnDirectory getDirectory();
 
     void setDirectory(KpnDirectory directory);
-
 }
