@@ -45,7 +45,33 @@
                                 </form>
                             </div>
                         </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="directoryModel:${directoryModels} ">
+                                    <td class="col-md-1" th:text="${directoryModel.name}"></td>
+                                    <td class="col-md-10" th:text="${directoryModel.description}"></td>
+                                    <td class="col-md-1">
+                                        <a href="#"
+                                           th:href="@{/directory/view/} + ${directoryModel.name}"
+                                           class="btn btn-xs green">View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
+
+
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ import java.util.List;
  * @author rafizan.baharum
  * @since 1/13/14
  */
-public interface DirectoryManager {
+public interface RepositoryManager {
 
     KpnDirectory findDirectoryById(Long id);
 

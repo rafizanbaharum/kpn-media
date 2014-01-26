@@ -1,7 +1,7 @@
 package my.gov.kpn.media.biz.manager.impl;
 
 import my.gov.kpn.media.biz.Util;
-import my.gov.kpn.media.biz.manager.DirectoryManager;
+import my.gov.kpn.media.biz.manager.RepositoryManager;
 import my.gov.kpn.media.core.dao.KpnDirectoryDao;
 import my.gov.kpn.media.core.dao.KpnMediaDao;
 import my.gov.kpn.media.core.model.KpnDirectory;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Service("directoryManager")
 @Transactional
-public class DirectoryManagerImpl implements DirectoryManager {
+public class RepositoryManagerImpl implements RepositoryManager {
 
     @Autowired
     private SessionFactory sessionFactory;

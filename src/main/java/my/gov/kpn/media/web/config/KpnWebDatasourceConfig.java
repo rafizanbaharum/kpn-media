@@ -23,7 +23,7 @@ public class KpnWebDatasourceConfig {
     @Bean
     public SessionFactory sessionFactory() {
         return new LocalSessionFactoryBuilder(dataSource())
-                .scanPackages("my.gov.kpn.core.model")
+                .scanPackages("my.gov.kpn.media.core.model")
                 .addProperties(hibernateProperties())
                 .buildSessionFactory();
     }
