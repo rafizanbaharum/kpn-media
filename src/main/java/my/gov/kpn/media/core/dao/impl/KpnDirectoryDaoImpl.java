@@ -49,6 +49,15 @@ public class KpnDirectoryDaoImpl extends DaoSupport<Long, KpnDirectory, KpnDirec
     }
 
     @Override
+    public KpnDirectory findByCode(String code) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select d from KpnDirectory d where d.code = :code");
+        query.setString("code", code);
+        query.setCacheable(true);
+        return (KpnDirectory) query.uniqueResult();
+    }
+
+    @Override
     public List<KpnDirectory> find(Integer offset, Integer limit) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select d from KpnDirectory d where " +

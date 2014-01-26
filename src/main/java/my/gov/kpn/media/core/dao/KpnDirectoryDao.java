@@ -26,6 +26,8 @@ public interface KpnDirectoryDao {
 
     KpnDirectory findByName(String name);
 
+    KpnDirectory findByCode(String code);
+
     List<KpnDirectory> find(Integer offset, Integer limit);
 
     List<KpnDirectory> find(String filter, Integer offset, Integer limit);

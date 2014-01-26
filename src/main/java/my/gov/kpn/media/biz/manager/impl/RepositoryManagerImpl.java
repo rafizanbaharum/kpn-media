@@ -45,6 +45,11 @@ public class RepositoryManagerImpl implements RepositoryManager {
     }
 
     @Override
+    public KpnDirectory findDirectoryByCode(String code) {
+        return directoryDao.findByCode(code);
+    }
+
+    @Override
     public List<KpnDirectory> findDirectories() {
         return directoryDao.find(0, 99999);
     }

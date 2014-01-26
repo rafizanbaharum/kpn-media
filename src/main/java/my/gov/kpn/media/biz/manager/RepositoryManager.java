@@ -16,6 +16,8 @@ public interface RepositoryManager {
 
     KpnDirectory findDirectoryByName(String name);
 
+    KpnDirectory findDirectoryByCode(String code);
+
     List<KpnDirectory> findDirectories();
 
     List<KpnDirectory> findDirectories(Integer offset, Integer limit);

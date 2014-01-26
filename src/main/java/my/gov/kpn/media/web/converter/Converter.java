@@ -20,6 +20,7 @@ public class Converter {
         DirectoryModel model = new DirectoryModel();
         model.setId(directory.getId());
         model.setName(directory.getName());
+        model.setCode(directory.getCode());
         return model;
     }
 

@@ -8,7 +8,7 @@ public class DirectoryModel {
 
     private Long id;
     private String name;
-    private String description;
+    private String code;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class DirectoryModel {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getCode() {
+        return code;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DirectoryModel {
         return "DirectoryModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

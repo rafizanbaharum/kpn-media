@@ -102,12 +102,12 @@
                                     <tbody>
                                         <tr th:each="directoryModel:${directoryModels} ">
                                             <td class="col-md-10">
-                                            <i class='icon-folder-close'></i>
+                                                <i class='icon-folder-close'></i>
                                                 <span th:text="${directoryModel.name}"></span>
                                             </td>
                                             <td class="col-md-2">
                                                 <a href="#"
-                                                   th:href="@{/directory/view/} + ${directoryModel.name}"
+                                                   th:href="@{/directory/view/} + ${directoryModel.code}"
                                                    class="btn btn-xs green">View</a>
                                             </td>
                                         </tr>
