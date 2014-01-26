@@ -1,10 +1,14 @@
 package my.gov.kpn.media.web.controller;
 
 import my.gov.kpn.media.biz.manager.RepositoryManager;
+import my.gov.kpn.media.core.model.KpnDirectory;
+import my.gov.kpn.media.core.model.impl.KpnDirectoryImpl;
 import my.gov.kpn.media.web.converter.Converter;
+import my.gov.kpn.media.web.model.DirectoryModel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,9 +44,13 @@ public class RepositoryController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveDirectory() {
+    public String saveDirectory(DirectoryModel directoryModel, ModelMap modelMap) {
         log.debug("Saving directory");
-        return "/repository/directory/save";
+        KpnDirectory directory = new KpnDirectoryImpl();
+        directory.setName(directoryModel.getName());
+        directory.setDescription(directoryModel.getDescription());
+        repositoryManager.saveDirectory(directory);
+        return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)

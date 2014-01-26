@@ -46,26 +46,27 @@
                                             <h4 class="modal-title">New directory</h4>
                                         </div>
                                         <form action="/repository/save" th:action="@{/repository/save}"
+                                              th:object="${commandDirectory}"
                                               method="post">
                                             <div class="modal-body">
                                                 <div class="scroller" style="height:150px" data-always-visible="1"
                                                      data-rail-visible1="1">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <h5>Please enter a name for the new directory: </h5>
+                                                            <p>Please enter a name for the new directory: </p>
 
                                                             <p>
-                                                                <input type="text"
+                                                                <input th:field="*{name}" type="text"
                                                                        class="col-md-12 form-control input-sm"/>
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <h5>Description for the new directory: </h5>
+                                                            <p>Description for the new directory: </p>
 
                                                             <p>
-                                                                <input type="text"
+                                                                <input th:field="*{description}" type="text"
                                                                        class="col-md-12 form-control input-sm"/>
                                                             </p>
                                                         </div>
