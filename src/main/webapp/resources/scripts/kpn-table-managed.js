@@ -21,14 +21,15 @@ var KpnTableManaged = function () {
                     [5, 10, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
-                "iDisplayLength": 10,
+                "iDisplayLength": -1,
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records",
                     "oPaginate": {
                         "sPrevious": "Prev",
                         "sNext": "Next"
-                    }
+                    },
+                    "sEmptyTable": "No data available in table. Use the red upload button"
                 },
                 "aoColumnDefs": [
                     {
@@ -76,14 +77,16 @@ var KpnTableManaged = function () {
                     [5, 10, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
-                "iDisplayLength": 10,
+                "iDisplayLength": -1,
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records",
                     "oPaginate": {
                         "sPrevious": "Prev",
                         "sNext": "Next"
-                    }
+                    },
+                    "sEmptyTable": "No data available in table. Use the red upload button"
+
                 },
                 "aoColumnDefs": [
                     {
