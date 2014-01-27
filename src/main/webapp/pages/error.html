@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="common :: head"></head>
+
+<body class="page-header-fixed">
+
+    <div th:replace="common :: header"></div>
+
+    <div class="clearfix"></div>
+    <div class="page-container">
+        <div th:replace="common :: sidebar-menu"></div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="dashboard.html" th:href="@{/dashboard}">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 page-404">
+                    <div class="number" th:text="${responseStatus}">
+                        404
+                    </div>
+                    <div class="details">
+                        <h3>Application has encountered an error.<br/>Please contact support on ...</h3>
+
+                        <h4 th:text="|Exception: ${exception.message}|"></h4>
+
+                        <p>
+                            We can not find the page you're looking for.<br/>
+                            <a href="dashboard.html" th:href="@{/dashboard}">Return home</a>
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="common :: footer"></div>
+</body>
+</html>

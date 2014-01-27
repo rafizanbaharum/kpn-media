@@ -1,6 +1,8 @@
 package my.gov.kpn.media.web.controller;
 
 import my.gov.kpn.media.biz.manager.RepositoryManager;
+import my.gov.kpn.media.core.dao.impl.DirectoryNotExistException;
+import my.gov.kpn.media.core.dao.impl.MediaNotExistException;
 import my.gov.kpn.media.core.model.KpnDirectory;
 import my.gov.kpn.media.core.model.KpnMedia;
 import my.gov.kpn.media.core.model.impl.KpnMediaImpl;
@@ -26,7 +28,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -60,56 +61,48 @@ public class FileController {
     @RequestMapping("/upload")
     public String upload(
             @ModelAttribute("uploadedFile") UploadedFileModel uploadedFile,
-            BindingResult result, MultipartHttpServletRequest request, HttpServletResponse response) {
+            BindingResult result, MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, DirectoryNotExistException {
+
+        KpnDirectory directory = repositoryManager.findDirectoryById(uploadedFile.getDirectoryId());
 
         Iterator<String> fileNames = request.getFileNames();
-        log.debug("fileNames = " + Arrays.asList(fileNames));
-        MultipartFile mpf = null;
+        MultipartFile mpf;
+
         while (fileNames.hasNext()) {
             String fileName = fileNames.next();
             mpf = request.getFile(fileName);
-
             fileValidator.validate(mpf, result);
-            log.debug("mpf = " + mpf.getOriginalFilename());
 
-            if (result.hasErrors()) {
-                return "/directory/view/" + uploadedFile.getDirectoryCode();
-            }
+            if (result.hasErrors()) return "/directory/view/" + uploadedFile.getDirectoryId();
 
-            try {
-                // create media
-                KpnMedia media = new KpnMediaImpl();
-                media.setName(mpf.getOriginalFilename());
-                media.setFileSize(mpf.getSize() / ONE_MB + " Kb");
-                media.setContentType(mpf.getContentType());
-                media.setBytes(mpf.getBytes());
-                // TODO
-                media.setDescription(null);
-                media.setPath("/fake/path");
+            // create media
+            KpnMedia media = new KpnMediaImpl();
+            media.setName(mpf.getOriginalFilename());
+            media.setFileSize(mpf.getSize() / ONE_MB + " Kb");
+            media.setContentType(mpf.getContentType());
+            media.setBytes(mpf.getBytes());
+            // TODO
+            media.setDescription(null);
+            media.setPath("/fake/path");
+            repositoryManager.addMedia(directory, media);
 
-                KpnDirectory directory = repositoryManager.findDirectoryByCode(uploadedFile.getDirectoryCode());
-                repositoryManager.addMedia(directory, media);
+            String baseDir = env.getProperty("base.dir");
+            File file = new File(MessageFormat.format("{0}/{1}/{2}", baseDir, directory.getName(), mpf.getOriginalFilename()));
 
-                String baseDir = env.getProperty("base.dir");
-                File file = new File(MessageFormat.format("{0}/{1}/{2}", baseDir, directory.getName(), mpf.getOriginalFilename()));
-
-                if (!file.exists()) {
-                    boolean newFile = file.createNewFile();
-                    if (newFile) {
-                        FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(file));
-                    }
+            if (!file.exists()) {
+                boolean newFile = file.createNewFile();
+                if (newFile) {
+                    FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(file));
                 }
-                log.debug(MessageFormat.format("File with name {0} has been created", mpf.getOriginalFilename()));
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+            log.debug(MessageFormat.format("File with name {0} has been created", mpf.getOriginalFilename()));
         }
-        return "redirect:/directory/view/" + uploadedFile.getDirectoryCode();
+        return "redirect:/directory/view/" + uploadedFile.getDirectoryId();
     }
 
 
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
-    public void download(@PathVariable Long id, HttpServletResponse response) {
+    public void download(@PathVariable Long id, HttpServletResponse response) throws MediaNotExistException {
         KpnMedia media = repositoryManager.findMediaById(id);
         KpnDirectory directory = media.getDirectory();
         try {

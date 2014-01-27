@@ -36,7 +36,8 @@ var KpnTableManaged = function () {
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ],
+                "bStateSave": true
             });
 
             jQuery('#kpn_table_1 .group-checkable').change(function () {
@@ -60,7 +61,7 @@ var KpnTableManaged = function () {
 
             jQuery('#kpn_table_1_wrapper .dataTables_filter input').addClass("form-control input-medium"); // modify table search input
             jQuery('#kpn_table_1_wrapper .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
-            //jQuery('#kpn_table_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+            jQuery('#kpn_table_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
 
 
             // begin second table
@@ -93,7 +94,8 @@ var KpnTableManaged = function () {
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ],
+                "bStateSave": true
             });
 
             jQuery('#kpn_table_2 .group-checkable').change(function () {
@@ -117,7 +119,7 @@ var KpnTableManaged = function () {
 
             jQuery('#kpn_table_2_wrapper .dataTables_filter input').addClass("form-control input-medium"); // modify table search input
             jQuery('#kpn_table_2_wrapper .dataTables_length select').addClass("form-control input-xsmall"); // modify table per page dropdown
-            //jQuery('#kpn_table_2_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+            jQuery('#kpn_table_2_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
         }
 
     };

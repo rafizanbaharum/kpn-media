@@ -12,10 +12,6 @@ public interface KpnDirectory extends KpnMetaObject {
 
     void setName(String name);
 
-    String getCode();
-
-    void setCode(String code);
-
     List<KpnMedia> getMedias();
 
     void setMedias(List<KpnMedia> medias);

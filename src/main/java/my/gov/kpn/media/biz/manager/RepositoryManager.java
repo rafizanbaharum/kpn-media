@@ -1,6 +1,8 @@
 package my.gov.kpn.media.biz.manager;
 
 
+import my.gov.kpn.media.core.dao.impl.DirectoryNotExistException;
+import my.gov.kpn.media.core.dao.impl.MediaNotExistException;
 import my.gov.kpn.media.core.model.KpnDirectory;
 import my.gov.kpn.media.core.model.KpnMedia;
 
@@ -12,13 +14,11 @@ import java.util.List;
  */
 public interface RepositoryManager {
 
-    KpnDirectory findDirectoryById(Long id);
+    KpnDirectory findDirectoryById(Long id) throws DirectoryNotExistException;
 
     KpnDirectory findDirectoryByName(String name);
 
-    KpnDirectory findDirectoryByCode(String code);
-
-    KpnMedia findMediaById(Long id);
+    KpnMedia findMediaById(Long id) throws MediaNotExistException;
 
     List<KpnDirectory> findDirectories();
 

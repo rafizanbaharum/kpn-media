@@ -4,6 +4,8 @@ import my.gov.kpn.media.biz.Util;
 import my.gov.kpn.media.biz.manager.RepositoryManager;
 import my.gov.kpn.media.core.dao.KpnDirectoryDao;
 import my.gov.kpn.media.core.dao.KpnMediaDao;
+import my.gov.kpn.media.core.dao.impl.DirectoryNotExistException;
+import my.gov.kpn.media.core.dao.impl.MediaNotExistException;
 import my.gov.kpn.media.core.model.KpnDirectory;
 import my.gov.kpn.media.core.model.KpnMedia;
 import org.hibernate.SessionFactory;
@@ -35,8 +37,14 @@ public class RepositoryManagerImpl implements RepositoryManager {
     private KpnMediaDao mediaDao;
 
     @Override
-    public KpnDirectory findDirectoryById(Long id) {
-        return directoryDao.findById(id);
+    public KpnDirectory findDirectoryById(Long id) throws DirectoryNotExistException {
+        KpnDirectory directory = directoryDao.findById(id);
+        if (null != directory) {
+            return directory;
+        }
+
+        throw new DirectoryNotExistException(id);
+
     }
 
     @Override
@@ -45,13 +53,12 @@ public class RepositoryManagerImpl implements RepositoryManager {
     }
 
     @Override
-    public KpnDirectory findDirectoryByCode(String code) {
-        return directoryDao.findByCode(code);
-    }
-
-    @Override
-    public KpnMedia findMediaById(Long id) {
-        return mediaDao.findById(id);
+    public KpnMedia findMediaById(Long id) throws MediaNotExistException {
+        KpnMedia media = mediaDao.findById(id);
+        if (media != null) {
+            return media;
+        }
+        throw new MediaNotExistException(id);
     }
 
     @Override
