@@ -59,7 +59,6 @@ public class RepositoryController {
 
         String baseDir = env.getProperty("base.dir");
         boolean mkdirs = new File(baseDir + "/" + directory.getName()).mkdirs();
-
         return "redirect:/dashboard";
     }
 

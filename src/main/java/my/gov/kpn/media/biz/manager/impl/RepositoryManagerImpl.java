@@ -50,6 +50,11 @@ public class RepositoryManagerImpl implements RepositoryManager {
     }
 
     @Override
+    public KpnMedia findMediaById(Long id) {
+        return mediaDao.findById(id);
+    }
+
+    @Override
     public List<KpnDirectory> findDirectories() {
         return directoryDao.find(0, 99999);
     }

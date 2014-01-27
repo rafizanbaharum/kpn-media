@@ -18,6 +18,8 @@ public interface RepositoryManager {
 
     KpnDirectory findDirectoryByCode(String code);
 
+    KpnMedia findMediaById(Long id);
+
     List<KpnDirectory> findDirectories();
 
     List<KpnDirectory> findDirectories(Integer offset, Integer limit);
@@ -47,5 +49,4 @@ public interface RepositoryManager {
     void updateMedia(KpnDirectory directory, KpnMedia media);
 
     void removeMedia(KpnDirectory directory, KpnMedia media);
-
 }

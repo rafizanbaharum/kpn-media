@@ -32,7 +32,7 @@ public class DirectoryController {
     @Autowired
     private Converter converter;
 
-    @RequestMapping(value = "view/{code}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{code}", method = RequestMethod.GET)
     public String viewDirectory(@PathVariable(value = "code") String directoryCode, ModelMap modelMap) {
         KpnDirectory directory = repositoryManager.findDirectoryByCode(directoryCode);
         List<KpnMedia> medias = directory.getMedias();
