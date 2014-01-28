@@ -29,7 +29,7 @@ var KpnTableManaged = function () {
                         "sPrevious": "Prev",
                         "sNext": "Next"
                     },
-                    "sEmptyTable": "No data available in table. Use the red upload button"
+                    "sEmptyTable": "No data available in table. Please login to upload media files"
                 },
                 "aoColumnDefs": [
                     {
