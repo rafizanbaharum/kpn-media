@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -48,7 +50,7 @@ public class DirectoryController {
         repositoryManager.saveDirectory(directory);
 
         String baseDir = env.getProperty("base.dir");
-        boolean mkdirs = new File(baseDir + "/" + directory.getName()).mkdirs();
+        boolean mkdirs = new File(baseDir + "/" + directory.getId()).mkdirs();
         return "redirect:/directory/view/" + directory.getId();
     }
 
@@ -66,7 +68,27 @@ public class DirectoryController {
         return "/directory/view";
     }
 
-    // TODO updateDirectory()
-    //
-    // TODO removeDirectory()
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateDirectory(@ModelAttribute DirectoryModel directoryModel, ModelMap modelMap) throws DirectoryNotExistException {
+        KpnDirectory directory = repositoryManager.findDirectoryById(directoryModel.getId());
+        directory.setName(directoryModel.getName());
+        repositoryManager.updateDirectory(directory);
+        return "redirect:/directory/view/" + directory.getId();
+    }
+
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    public String removeDirectory(@PathVariable Long id, ModelMap modelMap) throws DirectoryNotExistException {
+        KpnDirectory directory = repositoryManager.findDirectoryById(id);
+        String baseDir = env.getProperty("base.dir");
+        File dir = new File(MessageFormat.format("{0}/{1}", baseDir, directory.getId()));
+        File[] files = dir.listFiles();
+
+        // delete child
+        for (File file : files) {
+            file.delete();
+        }
+        dir.delete();
+        repositoryManager.removeDirectory(directory);
+        return "redirect:/dashboard";
+    }
 }

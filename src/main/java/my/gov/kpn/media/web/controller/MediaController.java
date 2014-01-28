@@ -35,10 +35,10 @@ import java.util.Iterator;
  * @since 1/26/14
  */
 @Controller
-@RequestMapping(value = "/file")
-public class FileController {
+@RequestMapping(value = "/media")
+public class MediaController {
 
-    private static final Logger log = Logger.getLogger(FileController.class);
+    private static final Logger log = Logger.getLogger(MediaController.class);
 
     private static final int ONE_MB = 1024;
 
@@ -64,7 +64,6 @@ public class FileController {
             BindingResult result, MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, DirectoryNotExistException {
 
         KpnDirectory directory = repositoryManager.findDirectoryById(uploadedFile.getDirectoryId());
-
         Iterator<String> fileNames = request.getFileNames();
         MultipartFile mpf;
 
@@ -81,13 +80,12 @@ public class FileController {
             media.setFileSize(mpf.getSize() / ONE_MB + " Kb");
             media.setContentType(mpf.getContentType());
             media.setBytes(mpf.getBytes());
-            // TODO
-            media.setDescription(null);
+            media.setDescription(null); // TODO description
             media.setPath("/fake/path");
             repositoryManager.addMedia(directory, media);
 
             String baseDir = env.getProperty("base.dir");
-            File file = new File(MessageFormat.format("{0}/{1}/{2}", baseDir, directory.getName(), mpf.getOriginalFilename()));
+            File file = new File(MessageFormat.format("{0}/{1}/{2}", baseDir, directory.getId(), mpf.getOriginalFilename()));
 
             if (!file.exists()) {
                 boolean newFile = file.createNewFile();
@@ -106,7 +104,9 @@ public class FileController {
         KpnMedia media = repositoryManager.findMediaById(id);
         KpnDirectory directory = media.getDirectory();
         try {
-            FileInputStream fis = new FileInputStream(directory.getId() + "/" + media.getName()); // TODO: build path
+            String baseDir = env.getProperty("base.dir");
+            File file = new File(MessageFormat.format("{0}/{1}/{2}", baseDir, directory.getId(), media.getName()));
+            FileInputStream fis = new FileInputStream(file);
             IOUtils.copy(fis, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {

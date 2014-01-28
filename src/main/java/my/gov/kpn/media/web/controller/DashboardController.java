@@ -29,9 +29,4 @@ public class DashboardController {
         modelMap.put("directoryModels", converter.convertDirectories(repositoryManager.findDirectories()));
         return "/dashboard";
     }
-
-    @ModelAttribute(value = "commandDirectory")
-    private DirectoryModel newDirectoryModel() {
-        return new DirectoryModel();
-    }
 }
