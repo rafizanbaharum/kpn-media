@@ -46,7 +46,7 @@ public class DirectoryController {
     @RequestMapping(method = RequestMethod.GET)
     public String listDirectory(ModelMap modelMap) {
         modelMap.put("directoryModels", converter.convertDirectories(repositoryManager.findDirectories()));
-        return "/admin/directory/list";
+        return "/directory/list";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class DirectoryController {
 
         String baseDir = env.getProperty("base.dir");
         boolean mkdirs = new File(baseDir + "/" + directory.getId()).mkdirs();
-        return "redirect:/admin/directory/view/" + directory.getId();
+        return "redirect:/directory/view/" + directory.getId();
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
@@ -71,7 +71,7 @@ public class DirectoryController {
         modelMap.addAttribute("directoryModel", directoryModel);
         modelMap.addAttribute("mediaModels", mediaModels);
 
-        return "/admin/directory/view";
+        return "/directory/view";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -79,7 +79,7 @@ public class DirectoryController {
         KpnDirectory directory = repositoryManager.findDirectoryById(directoryModel.getId());
         directory.setName(directoryModel.getName());
         repositoryManager.updateDirectory(directory);
-        return "redirect:/admin/directory/view/" + directory.getId();
+        return "redirect:/directory/view/" + directory.getId();
     }
 
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
@@ -95,6 +95,6 @@ public class DirectoryController {
         }
         dir.delete();
         repositoryManager.removeDirectory(directory);
-        return "redirect:/admin/directory/list";
+        return "redirect:/directory/list";
     }
 }

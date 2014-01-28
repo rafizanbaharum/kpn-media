@@ -15,4 +15,9 @@ public class MediatorController {
     public String getDashboard() {
         return "redirect:/dashboard";
     }
+
+    @RequestMapping("secure")
+    public String getSecureDashboard() {
+        return "/secure/dashboard";
+    }
 }

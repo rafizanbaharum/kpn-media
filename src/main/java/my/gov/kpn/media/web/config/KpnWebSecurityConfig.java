@@ -48,14 +48,14 @@ public class KpnWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/secure/")
+                .defaultSuccessUrl("/")
                 .failureUrl("/gate/in?login_error=1")
                 .loginPage("/gate/in")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/index")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
     }
 
