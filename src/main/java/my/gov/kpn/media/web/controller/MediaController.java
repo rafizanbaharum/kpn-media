@@ -72,7 +72,7 @@ public class MediaController {
             mpf = request.getFile(fileName);
             fileValidator.validate(mpf, result);
 
-            if (result.hasErrors()) return "/directory/view/" + uploadedFile.getDirectoryId();
+            if (result.hasErrors()) return "redirect:/directory/view/" + uploadedFile.getDirectoryId();
 
             // create media
             KpnMedia media = new KpnMediaImpl();
