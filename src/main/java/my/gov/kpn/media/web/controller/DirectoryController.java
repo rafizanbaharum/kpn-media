@@ -71,7 +71,7 @@ public class DirectoryController {
         modelMap.addAttribute("directoryModel", directoryModel);
         modelMap.addAttribute("mediaModels", mediaModels);
 
-        return "/directory/view";
+        return "/download";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
