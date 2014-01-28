@@ -144,9 +144,9 @@
                 </a>
             </li>
             <li class="">
-                <a href="../gate/in" th:href="@{/gate/in}">
+                <a href="../login.html" th:href="@{${sec.isAnonymous()} ? '/gate/in' : '/gate/out'}">
                     <i class="icon-adjust"></i>
-                    <span class="title">Login</span>
+                    <span class="title" th:text="${sec.isAnonymous() ? 'Sign in' : 'Sign out'}">Login</span>
                     <span class="arrow "></span>
                 </a>
             </li>
